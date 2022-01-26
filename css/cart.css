@@ -1,0 +1,93 @@
+/********************* CART SECTION ********************/
+
+#cart {
+    overflow-x: auto;
+}
+
+#cart table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+    white-space: nowrap;
+}
+
+#cart img {
+    width: 55px;
+}
+
+#cart table td:nth-child(1) {
+    width: 100px;
+    text-align: center;
+}
+
+#cart table td:nth-child(2), #cart table td:nth-child(4), #cart table td:nth-child(5) {
+    width: 150px;
+    text-align: center;
+}
+
+#cart table td:nth-child(3) {
+    width: 250px;
+    text-align: center;
+}
+
+#cart table thead {
+    border: 1px solid #e2e9e1;
+    border-left: none;
+    border-right: none;
+}
+
+.total {
+    border: 1.5px solid #088178;
+    border-left: none;
+    border-right: none;
+    padding: 18px 0;
+}
+
+#cart table thead td {
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 13px;
+    padding: 18px 0;
+}
+
+#cart table tbody td i {
+    font-size: 18px;
+    color: #088178;
+}
+
+#cart table tbody tr td {
+    padding: 10px;
+}
+
+.buy {
+    width: 25%;
+    margin: 10px auto;
+}
+
+.buy button {
+    font-size: 15px;
+    font-weight: 700;
+    background: #088178;
+    border-radius: 5px;
+    margin: 15px 5px 10px 10px;
+    padding: 12.5px 20px;
+    color: #E3E6F3;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 2.5px solid #088178;
+}
+
+.buy button:hover {
+    background: none;
+    color: #088178; 
+}
+
+
+/********************* MEDIA QUERY ********************/
+
+@media (max-width: 799px) {
+    #mobile li a.active {
+        color: #088178;
+    }
+
+}

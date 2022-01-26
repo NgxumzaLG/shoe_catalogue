@@ -1,0 +1,144 @@
+/********************* SECTION HERO ********************/
+
+#hero {
+    /* background-image: url("/img/Lusanda.jpg"); */
+    height: 90vh;
+    width: 100%;
+    /* background-size: cover; */
+    /* background-position: top 25% right 0; */
+    padding: 0 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    background: #E3E6F3;
+}
+
+#hero h4 {
+    padding-bottom: 15px;
+}
+
+#hero h1  {
+    color: #088178;
+}
+
+#hero a {
+    font-size: 15px;
+    font-weight: 700;
+    background: #088178;
+    border-radius: 5px;
+    margin: 15px 5px 10px 10px;
+    padding: 12.5px 20px;
+    color: #E3E6F3;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 2.5px solid #088178;
+    text-decoration: none;
+}
+
+#hero a:hover {
+    background: none;
+    color: #088178; 
+}
+
+
+/********************* SECTION BRANDS ********************/
+
+#brands .brand-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+#brands .brand-container .fe-box {
+    width: 180px;
+    text-align: center;
+    padding: 25px 15px;
+    box-shadow: 20px 20px 34px rgba(0, 0, 0, 0.03);
+    border: 1px solid #cce7d0;
+    border-radius: 4px;
+    margin: 15px 0;
+}
+
+#brands .brand-container .fe-box:hover {
+    box-shadow: 10px 10px 54px rgba(70, 62, 221, 0.1);
+}
+
+#brands .brand-container .fe-box img {
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+#brands .fe-box h6 {
+    /* display: inline-block; */
+    padding: 9px 8px 6px 8px;
+    line-height: 1;
+    border-radius: 4px;
+    color: #088178;
+    background-color: #fddde4;
+}
+
+#brands .brand-container .fe-box:nth-child(2) h6 {
+    background-color: #cdebbc;
+}
+
+#brands .brand-container .fe-box:nth-child(3) h6 {
+    background-color: #d1e8f2;
+}
+
+#brands .brand-container .fe-box:nth-child(4) h6 {
+    background-color: #cdd4f8;
+}
+
+#brands .brand-container .fe-box:nth-child(5) h6 {
+    background-color: #f6bdf6;
+}
+
+#brands .brand-container .fe-box:nth-child(6) h6 {
+    background-color: #fff2e5;
+}
+
+
+/********************* MEDIA QUERY ********************/
+
+@media (max-width: 799px) {
+    #hero {
+        height: 65vh;
+        padding: 0 80px;
+    }
+
+    #brands .brand-container {
+        justify-content: center;
+    }
+
+    #brands .brand-container .fe-box {
+        margin: 15px;
+    }
+    
+}
+
+@media (max-width: 564px) {
+    #hero {
+        height: 75vh;
+    }
+
+}
+
+@media (max-width: 477px) {
+    #hero {
+        padding: 0 20px;
+    }
+
+    #brands .brand-container .fe-box {
+        width: 155px;
+    }
+
+}
+
+@media (max-width: 352px) {
+    #hero {
+        height: 90vh;
+    }
+
+}
