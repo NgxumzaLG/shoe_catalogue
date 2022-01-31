@@ -8,6 +8,30 @@
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css">
     <link rel="stylesheet" href="./css/utilities.css">
     <link rel="stylesheet" href="./css/shop.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.min.js"></script>
+    
+    <script type="text/x-template" class="shopTemplate">
+        {{#each shopProducts }}
+            <div class="pro">
+                <img src={{image}} alt="">
+                <div class="des">
+                    <span>color: <strong>{{color}}</strong></span>
+                    <div>
+                        <span>size: <strong>{{size}}</strong>  In Store: <strong>{{in_stock}}</strong></span>
+                    </div>
+                    
+                    <div class="star">
+                        <h5>{{brand}}</h5>
+                    </div>
+                    <h4>R{{price}}</h4>
+                </div>
+                <button class="add-btn" value={{code}}><i class="fal fa-shopping-cart cart"></i></button>
+                <!-- <a href="#"><i class="fal fa-shopping-cart cart"></i></a> -->
+            </div>
+        
+        {{/each}}
+        
+    </script>
 
 </head>
 <body>
@@ -31,142 +55,67 @@
 
     </section>
 
+    <section >
+
+    </section>
+
     <section id="product1" class="section-p1">
-        <h2>Featured Products</h2>
-        <p>Summer Collection New Modern Design</p>
-        <div class="pro-container">
-            <div class="pro">
-                <img src="./img/Lusanda.jpg" alt="">
-                <div class="des">
-                    <span>color: <strong>Orange</strong></span>
-                    <div>
-                        <span>size: <strong>6</strong>  In Store: <strong>3</strong></span>
-                    </div>
-                    
-                    <div class="star">
-                        <h5>Adidas</h5>
-                    </div>
-                    <h4>R750</h4>
-                </div>
-                <a href="#"><i class="fal fa-shopping-cart cart"></i></a>
+        <h3>Search by:</h3>
+        <div class="search">
+            <div class="block">
+                <h4>Brand</h4>
+                <select id="brand" class="search-brand">
+                    <option value="any">any</option>
+                    <option value="Adidas">Adidas</option>
+                    <option value="Nike">Nike</option>
+                    <option value="Vans">Vans</option>
+                    <option value="Asics">Asics</option>
+                </select>            
             </div>
 
-            <div class="pro">
-                <img src="./img/Lusanda.jpg" alt="">
-                <div class="des">
-                    <span>color: <strong>Orange</strong></span>
-                    <div>
-                        <span>size: <strong>6</strong>  In Store: <strong>3</strong></span>
-                    </div>
-                    
-                    <div class="star">
-                        <h5>Adidas</h5>
-                    </div>
-                    <h4>R750</h4>
-                </div>
-                <a href="#"><i class="fal fa-shopping-cart cart"></i></a>
+            <div class="block">
+                <h4>Size</h4>
+                <input class="search-size" type="number" id="size" value="">
             </div>
 
-            <div class="pro">
-                <img src="./img/Lusanda.jpg" alt="">
-                <div class="des">
-                    <span>color: <strong>Orange</strong></span>
-                    <div>
-                        <span>size: <strong>6</strong>  In Store: <strong>3</strong></span>
-                    </div>
-                    
-                    <div class="star">
-                        <h5>Adidas</h5>
-                    </div>
-                    <h4>R750</h4>
-                </div>
-                <a href="#"><i class="fal fa-shopping-cart cart"></i></a>
+            <div class="block">
+                <h4>Color</h4>
+                <select id="color" class="search-color">
+                    <option value="any">any</option>
+                    <option value="Black">Black</option>
+                    <option value="Blue">Blue</option>
+                    <option value="White">White</option>
+                    <option value="Orange">Orange</option>
+                </select>            
             </div>
+        </div>
 
-            <div class="pro">
+        <div id="pro-container">
+            <!-- <div class="pro">
                 <img src="./img/Lusanda.jpg" alt="">
                 <div class="des">
-                    <span>color: <strong>Orange</strong></span>
+                    <span>color: <strong>Black</strong></span>
                     <div>
-                        <span>size: <strong>6</strong>  In Store: <strong>3</strong></span>
+                        <span>size: <strong>4</strong>  In Store: <strong>3</strong></span>
                     </div>
                     
                     <div class="star">
-                        <h5>Adidas</h5>
+                        <h5>Nike</h5>
                     </div>
-                    <h4>R750</h4>
+                    <h4>R 750</h4>
                 </div>
                 <a href="#"><i class="fal fa-shopping-cart cart"></i></a>
-            </div>
+            </div> -->
 
-            <div class="pro">
-                <img src="./img/Lusanda.jpg" alt="">
-                <div class="des">
-                    <span>color: <strong>Orange</strong></span>
-                    <div>
-                        <span>size: <strong>6</strong>  In Store: <strong>3</strong></span>
-                    </div>
-                    
-                    <div class="star">
-                        <h5>Adidas</h5>
-                    </div>
-                    <h4>R750</h4>
-                </div>
-                <a href="#"><i class="fal fa-shopping-cart cart"></i></a>
-            </div>
-
-            <div class="pro">
-                <img src="./img/Lusanda.jpg" alt="">
-                <div class="des">
-                    <span>color: <strong>Orange</strong></span>
-                    <div>
-                        <span>size: <strong>6</strong>  In Store: <strong>3</strong></span>
-                    </div>
-                    
-                    <div class="star">
-                        <h5>Adidas</h5>
-                    </div>
-                    <h4>R750</h4>
-                </div>
-                <a href="#"><i class="fal fa-shopping-cart cart"></i></a>
-            </div>
-
-            <div class="pro">
-                <img src="./img/Lusanda.jpg" alt="">
-                <div class="des">
-                    <span>color: <strong>Orange</strong></span>
-                    <div>
-                        <span>size: <strong>6</strong>  In Store: <strong>3</strong></span>
-                    </div>
-                    
-                    <div class="star">
-                        <h5>Adidas</h5>
-                    </div>
-                    <h4>R750</h4>
-                </div>
-                <a href="#"><i class="fal fa-shopping-cart cart"></i></a>
-            </div>
-
-            <div class="pro">
-                <img src="./img/Lusanda.jpg" alt="">
-                <div class="des">
-                    <span>color: <strong>Orange</strong></span>
-                    <div>
-                        <span>size: <strong>6</strong>  In Store: <strong>3</strong></span>
-                    </div>
-                    
-                    <div class="star">
-                        <h5>Adidas</h5>
-                    </div>
-                    <h4>R750</h4>
-                </div>
-                <a href="#"><i class="fal fa-shopping-cart cart"></i></a>
-            </div>
+            
         </div>
 
     </section>
 
+    <script src="./js/shoe-functions.js"></script>
+
     <script src="./js/script.js"></script>
+    <script src="./js/shop-dom.js"></script>
     
 </body>
 </html>
