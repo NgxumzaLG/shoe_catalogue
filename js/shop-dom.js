@@ -67,7 +67,7 @@ if (localStorage['cart']) {
 }
 
 //  Instantiate the instance of the factory function
-const shoeService = ShoeService({ ourStock });
+const shoeService = ShoeService(ourStock);
 
 
 // DOM load Or Page reload

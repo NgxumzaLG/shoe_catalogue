@@ -12,7 +12,7 @@ let total = 0;
 
 
 //  Instantiate the instance of the factory function
-const shoeService = ShoeService({ shopStock });
+const shoeService = ShoeService(shopStock);
 
 
 // DOM load Or Page reload

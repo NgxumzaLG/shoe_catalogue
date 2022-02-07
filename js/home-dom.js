@@ -7,8 +7,7 @@ let shopStock = JSON.parse(localStorage.getItem('products'));
 let myCart = JSON.parse(localStorage.getItem('cart'));
 
 //  Instantiate the instance of the factory function
-const shoeService = ShoeService({ shopStock });
-
+const shoeService = ShoeService(shopStock);
 
 // DOM load Or Page reload
 document.addEventListener('DOMContentLoaded', () => {
