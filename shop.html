@@ -26,7 +26,6 @@
                     <h4>R{{price}}</h4>
                 </div>
                 <button class="add-btn" value={{code}}><i class="fal fa-shopping-cart cart"></i></button>
-                <!-- <a href="#"><i class="fal fa-shopping-cart cart"></i></a> -->
             </div>
         
         {{/each}}
@@ -43,13 +42,13 @@
             <ul id="navbar">
                 <li><a href="index.html">Home</a></li>
                 <li><a class="active" href="shop.html">Shop</a></li>
-                <li><a href="cart.html" id="lg-bag"><i class="fal fa-shopping-bag"></i></a></li>
+                <li><a href="cart.html" id="lg-bag"><i class="fal fa-shopping-bag"><span class="cart-items">0</span></i></a></li>
                 <a href="#" id="close"><i class="far fa-times"></i></a>
             </ul>
         </div>
 
         <div id="mobile">
-            <a href="cart.html"><i class="fal fa-shopping-bag"></i></a>
+            <a href="cart.html"><i class="fal fa-shopping-bag"><span class="cart-items-respon">0</span></i></a>
             <i id="bar" class="fas fa-outdent"></i>
         </div>
 

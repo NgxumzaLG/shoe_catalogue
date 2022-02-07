@@ -1,5 +1,5 @@
 function ShoeService(data) {
-    var products = data.products || [];
+    var products = data || [];
     var userCart = [];
 
     function getProducts() {
@@ -75,11 +75,16 @@ function ShoeService(data) {
         let qty = 0;
         let grandTotal = 0;
         if (cart !== null) {
-            for (const item of cart) {
+            // for (const item of cart) {
+            //     qty += item.quantity;
+            //     grandTotal += item.price;
+        
+            // } OR 
+
+            cart.map(item => {
                 qty += item.quantity;
                 grandTotal += item.price;
-        
-            }
+            });
         }
         
         return {

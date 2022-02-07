@@ -1,5 +1,7 @@
 // Reference all the elements
-var proContainer = document.getElementById('pro-container');
+const proContainer = document.getElementById('pro-container');
+const cartItems = document.querySelector('.cart-items');
+const cartItemsRespon = document.querySelector('.cart-items-respon');
 
 // Compile Templates
 var shopTemplateSource = document.querySelector(".shopTemplate").innerHTML;
@@ -65,12 +67,16 @@ if (localStorage['cart']) {
 }
 
 //  Instantiate the instance of the factory function
-const shoeService = ShoeService({products: ourStock, cart});
+const shoeService = ShoeService({ ourStock });
 
 
 // DOM load Or Page reload
 document.addEventListener('DOMContentLoaded', () => {
-
+    shoeService.setCart(cart);
+    let currentCart = shoeService.getCart();
+    let total = shoeService.getTotal(currentCart);
+    
+    displayAllTotals(total);
     proContainer.innerHTML = shopTemplate({shopProducts: ourStock});
 
     const addButtons = [...document.querySelectorAll('.add-btn')];
@@ -122,23 +128,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (someF === false) {
                 cart = [...cart, cartItem];
-                // console.log(cart)
                 updateCart(cart);
                 location.reload()
-            }
-            
-            // console.log(cart);
-            
+
+            }            
         });
 
     });
-    // console.log(addButtons);
 
 });
 
 
-// Functions
-
+// FUNCTIONS
 function updateProducts(products) {
     localStorage.setItem('products', JSON.stringify(products));
 
@@ -153,7 +154,6 @@ function getProduct(code) {
     let products = ourStock;
     let test = products.find(product => product.code == code);
 
-
     return test;
 }
 
@@ -165,19 +165,8 @@ function searchInput() {
     };
 }
 
-// function displayProducts(stock) {
-//     let results = '';
+function displayAllTotals(ourCart) {
+    cartItems.innerHTML = `${ourCart.qty}`;
+    cartItemsRespon.innerHTML = `${ourCart.qty}`;
 
-//     stock.forEach(product => {
-//         results += `
-        
-//         `;
-
-//     });
-
-//     proContainer.innerHTML = results;
-
-// }
-
-// displayProducts(ourStock);
-
+}

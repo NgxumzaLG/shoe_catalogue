@@ -13,6 +13,7 @@
 #product1 .search {
     display: flex;
     justify-content: center;
+    flex-wrap: wrap;
 }
 
 #product1 .search .block {
@@ -123,3 +124,4 @@
 
 
 /********************* MEDIA QUERY ********************/
+
