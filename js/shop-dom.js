@@ -7,56 +7,17 @@ const cartItemsRespon = document.querySelector('.cart-items-respon');
 var shopTemplateSource = document.querySelector(".shopTemplate").innerHTML;
 var shopTemplate = Handlebars.compile(shopTemplateSource);
 
-//  Start-up products for the shop
-
-var startUp = [
-    {
-        code : 'NAF01',
-        color : 'Blue',
-        brand : 'Nike',
-        size: 7,
-        price : 1250,
-        image: './img/shopping-bag.png',
-        in_stock : 5
-    },
-    {
-        code : 'AN01',
-        color : 'Orange',
-        brand : 'Adidas',
-        image: './img/shopping-bag.png',
-        size: 6,
-        price : 750,
-        in_stock : 3
-    },
-    {
-        code : 'VSK8',
-        color : 'Yellow',
-        brand : 'Vans',
-        image: './img/shopping-bag.png',
-        size: 4,
-        price : 900,
-        in_stock : 1
-    },
-    {
-        code : 'AS06',
-        color : 'Brown',
-        brand : 'Asics',
-        image: './img/shopping-bag.png',
-        size: 6,
-        price : 850,
-        in_stock : 1
-    }
-];
-
 let cart = [];
 let ourStock = [];
 
 // localStorage 
 if (localStorage['products']) {
-    ourStock = JSON.parse(localStorage.getItem('products'));
+    let fromLocalStorage = JSON.parse(localStorage.getItem('products'));   
+    ourStock = fromLocalStorage;
+
 
 } else {
-    ourStock = startUp;
+    ourStock = productList;
     updateProducts(ourStock)
 
 }
@@ -68,6 +29,7 @@ if (localStorage['cart']) {
 
 //  Instantiate the instance of the factory function
 const shoeService = ShoeService(ourStock);
+let addButtons;
 
 
 // DOM load Or Page reload
@@ -79,16 +41,20 @@ document.addEventListener('DOMContentLoaded', () => {
     displayAllTotals(total);
     proContainer.innerHTML = shopTemplate({shopProducts: ourStock});
 
-    const addButtons = [...document.querySelectorAll('.add-btn')];
+    addButtons = [...document.querySelectorAll('.add-btn')];
     const brandSearch = document.getElementById('brand');
     const sizeSearch = document.getElementById('size');
     const colorSearch = document.getElementById('color');
+
+    addToCart(addButtons, cart);
     
     brandSearch.addEventListener('change', () => {
         let searchValues = searchInput();
         let save = shoeService.filterProduct(searchValues);
 
         proContainer.innerHTML = shopTemplate({shopProducts: save});
+        addButtons = [...document.querySelectorAll('.add-btn')];
+        addToCart(addButtons, cart);
     });
 
     sizeSearch.addEventListener('keyup', () => {
@@ -96,6 +62,8 @@ document.addEventListener('DOMContentLoaded', () => {
         let save = shoeService.filterProduct(searchValues);
 
         proContainer.innerHTML = shopTemplate({shopProducts: save});
+        addButtons = [...document.querySelectorAll('.add-btn')];
+        addToCart(addButtons, cart);
     });
 
     colorSearch.addEventListener('change', () => {
@@ -103,40 +71,51 @@ document.addEventListener('DOMContentLoaded', () => {
         let save = shoeService.filterProduct(searchValues);
 
         proContainer.innerHTML = shopTemplate({shopProducts: save});
+        addButtons = [...document.querySelectorAll('.add-btn')];
+        addToCart(addButtons, cart);
     });
 
-    addButtons.forEach(button => {
-        let value = button.value;
-        let inCart = cart.find(item => item.code == value);
+    // addButtons.forEach(button => {
+    //     let value = button.value;
+    //     let inCart = cart.find(item => item.code == value);
 
-        if (inCart) {
-            button.style['color'] = 'crimson';
-            button.style['transform'] = 'scale(1)';
-            button.style['backgroundColor'] = '#ffccd5';
-            button.style['borderColor'] = '#ffb3c1';
-            button.disabled = true;
-        } 
+    //     if (inCart) {
+    //         button.style['color'] = 'crimson';
+    //         button.style['transform'] = 'scale(1)';
+    //         button.style['backgroundColor'] = '#ffccd5';
+    //         button.style['borderColor'] = '#ffb3c1';
+    //         button.disabled = true;
+    //     } 
 
-        button.addEventListener('click', event => {
-            event.target.disabled = true;
-            // Get the Item picked
-            let thisItem = getProduct(value);
-            // let subTotal = shoeService.subTotal(thisItem);
-            let cartItem = {...thisItem, quantity: 1};
-            // Is the Item picked in the cart??
-            let someF = cart.some(items => items.code == value);
+    //     button.addEventListener('click', event => {
+    //         event.target.disabled = true;
+    //         // Get the Item picked
+    //         let thisItem = getProduct(value);
+    //         // let subTotal = shoeService.subTotal(thisItem);
+    //         let cartItem = {...thisItem, quantity: 1};
+    //         // Is the Item picked in the cart??
+    //         let someF = cart.some(items => items.code == value);
 
-            if (someF === false) {
-                cart = [...cart, cartItem];
-                updateCart(cart);
-                location.reload()
+    //         if (someF === false) {
+    //             cart = [...cart, cartItem];
+    //             updateCart(cart);
+    //             location.reload()
 
-            }            
-        });
+    //         }            
+    //     });
 
-    });
+    // });
+    // console.log(addButtons);
+
+    // addButtons.addEventListener('click', function() {
+    //     let test = addButtons.value;
+    //     console.log(test);
+    // })
+
 
 });
+
+
 
 
 // FUNCTIONS
@@ -169,4 +148,35 @@ function displayAllTotals(ourCart) {
     cartItems.innerHTML = `${ourCart.qty}`;
     cartItemsRespon.innerHTML = `${ourCart.qty}`;
 
+}
+
+function addToCart(addBtns, products) {
+    addBtns.forEach(button => {
+        let value = button.value;
+        let inCart = products.find(item => item.code == value);
+
+        if (inCart) {
+            button.style['color'] = 'crimson';
+            button.style['transform'] = 'scale(1)';
+            button.style['backgroundColor'] = '#ffccd5';
+            button.style['borderColor'] = '#ffb3c1';
+            button.disabled = true;
+        } 
+
+        button.addEventListener('click', () => {
+            // Get the Item picked
+            let thisItem = getProduct(value);
+            // let subTotal = shoeService.subTotal(thisItem);
+            let cartItem = {...thisItem, quantity: 1};
+            // Is the Item picked in the cart??
+            let someF = products.some(items => items.code == value);
+
+            if (someF === false) {
+                products = [...products, cartItem];
+                updateCart(products);
+                location.reload()
+
+            }            
+        });
+    });
 }

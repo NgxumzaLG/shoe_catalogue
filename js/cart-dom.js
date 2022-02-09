@@ -1,6 +1,7 @@
 // Reference all the elements
 const displayCartItems = document.querySelector('.table-body');
 const buyButton = document.querySelector('.purchase');
+const clearButton = document.querySelector('.clear-cart');
 const cartItems = document.querySelector('.cart-items');
 const cartItemsRespon = document.querySelector('.cart-items-respon');
 
@@ -31,9 +32,10 @@ document.addEventListener('DOMContentLoaded', () => {
                                                    <td><a href="#"><i class="far fa-times-circle"></i></a></td>
                                                    <td><img src=${item.image} alt=""></td>
                                                    <td>${item.brand}</td>
-                                                   <td>${item.price}<span class="zeros">,00</span></td>
+                                                   <td>${item.size}</td>
+                                                   <td><span class="rand-sign">R </span>${item.price}<span class="zeros">,00</span></td>
                                                    <td>${item.quantity}</td>
-                                                   <td>${item.price}<span class="zeros">,00</span></td>
+                                                   <td><span class="rand-sign">R </span>${item.price}<span class="zeros">,00</span></td>
                                                </tr>
                                                    `;
            });
@@ -59,9 +61,10 @@ document.addEventListener('DOMContentLoaded', () => {
                                             <td></td>
                                             <td></td>
                                             <td></td>
+                                            <td></td>
                                             <th class="total">TOTAL</th>
                                             <td class="total">${total.qty}</td>
-                                            <td class="total">R${total.grandTotal}<span class="zeros">,00</span></td>
+                                            <td class="total"><span class="rand-sign">R </span>${total.grandTotal}<span class="zeros">,00</span></td>
                                         </tr>
                                             `;
                                             
@@ -70,13 +73,17 @@ document.addEventListener('DOMContentLoaded', () => {
         console.log(error)
         
     }
-
     
 
     buyButton.addEventListener('click', () => {
         localStorage.removeItem("cart");
         location.reload();
 
+    });
+
+    clearButton.addEventListener('click', () => {
+        localStorage.removeItem("cart");
+        location.reload();
     });
 
 });
