@@ -42,18 +42,6 @@
     border-right: none;
 }
 
-.total {
-    border: 1.5px solid #088178;
-    border-left: none;
-    border-right: none;
-    padding: 18px 0;
-}
-
-.empty {
-    padding: 18px 0;
-    color: crimson;
-}
-
 #cart table thead td {
     font-weight: 700;
     text-transform: uppercase;
@@ -66,6 +54,23 @@
     color: #088178;
 }
 
+#cart table tbody tr td {
+    padding: 10px;
+}
+
+#cart table tbody button {
+    background-color: transparent;
+    border: none;
+}
+
+#cart table tbody i:hover {
+    cursor: pointer;
+}
+
+.space {
+    margin: 0 25px;
+}
+
 .zeros {
     font-size: 13px;
 }
@@ -75,8 +80,16 @@
     font-weight: bolder;
 }
 
-#cart table tbody tr td {
-    padding: 10px;
+.total {
+    border: 1.5px solid #088178;
+    border-left: none;
+    border-right: none;
+    padding: 18px 0;
+}
+
+.empty {
+    padding: 18px 0;
+    color: crimson;
 }
 
 .buy {

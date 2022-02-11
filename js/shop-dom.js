@@ -52,70 +52,57 @@ document.addEventListener('DOMContentLoaded', () => {
         let searchValues = searchInput();
         let save = shoeService.filterProduct(searchValues);
 
-        proContainer.innerHTML = shopTemplate({shopProducts: save});
-        addButtons = [...document.querySelectorAll('.add-btn')];
-        addToCart(addButtons, cart);
+        if (save.length !== 0) {
+            proContainer.innerHTML = shopTemplate({shopProducts: save});
+            addButtons = [...document.querySelectorAll('.add-btn')];
+            addToCart(addButtons, cart);
+
+        } else {
+            proContainer.innerHTML = `
+                                        <div class="search-results">
+                                        <h4>Sorry! no item found</h4>
+                                        </div>
+                                    `;
+        }
     });
 
     sizeSearch.addEventListener('keyup', () => {
         let searchValues = searchInput();
         let save = shoeService.filterProduct(searchValues);
 
-        proContainer.innerHTML = shopTemplate({shopProducts: save});
-        addButtons = [...document.querySelectorAll('.add-btn')];
-        addToCart(addButtons, cart);
+        if (save.length !== 0) {
+            proContainer.innerHTML = shopTemplate({shopProducts: save});
+            addButtons = [...document.querySelectorAll('.add-btn')];
+            addToCart(addButtons, cart);
+
+        } else {
+            proContainer.innerHTML = `
+                                        <div class="search-results">
+                                        <h4>Sorry! no item found</h4>
+                                        </div>
+                                    `;
+        }
     });
 
     colorSearch.addEventListener('change', () => {
         let searchValues = searchInput();
         let save = shoeService.filterProduct(searchValues);
 
-        proContainer.innerHTML = shopTemplate({shopProducts: save});
-        addButtons = [...document.querySelectorAll('.add-btn')];
-        addToCart(addButtons, cart);
+        if (save.length !== 0) {
+            proContainer.innerHTML = shopTemplate({shopProducts: save});
+            addButtons = [...document.querySelectorAll('.add-btn')];
+            addToCart(addButtons, cart);
+
+        } else {
+            proContainer.innerHTML = `
+                                        <div class="search-results">
+                                        <h4>Sorry! no item found</h4>
+                                        </div>
+                                    `;
+        }
     });
 
-    // addButtons.forEach(button => {
-    //     let value = button.value;
-    //     let inCart = cart.find(item => item.code == value);
-
-    //     if (inCart) {
-    //         button.style['color'] = 'crimson';
-    //         button.style['transform'] = 'scale(1)';
-    //         button.style['backgroundColor'] = '#ffccd5';
-    //         button.style['borderColor'] = '#ffb3c1';
-    //         button.disabled = true;
-    //     } 
-
-    //     button.addEventListener('click', event => {
-    //         event.target.disabled = true;
-    //         // Get the Item picked
-    //         let thisItem = getProduct(value);
-    //         // let subTotal = shoeService.subTotal(thisItem);
-    //         let cartItem = {...thisItem, quantity: 1};
-    //         // Is the Item picked in the cart??
-    //         let someF = cart.some(items => items.code == value);
-
-    //         if (someF === false) {
-    //             cart = [...cart, cartItem];
-    //             updateCart(cart);
-    //             location.reload()
-
-    //         }            
-    //     });
-
-    // });
-    // console.log(addButtons);
-
-    // addButtons.addEventListener('click', function() {
-    //     let test = addButtons.value;
-    //     console.log(test);
-    // })
-
-
 });
-
-
 
 
 // FUNCTIONS
@@ -153,7 +140,7 @@ function displayAllTotals(ourCart) {
 function addToCart(addBtns, products) {
     addBtns.forEach(button => {
         let value = button.value;
-        let inCart = products.find(item => item.code == value);
+        let inCart = products.find(item => item.code === value);
 
         if (inCart) {
             button.style['color'] = 'crimson';
@@ -166,12 +153,12 @@ function addToCart(addBtns, products) {
         button.addEventListener('click', () => {
             // Get the Item picked
             let thisItem = getProduct(value);
-            // let subTotal = shoeService.subTotal(thisItem);
-            let cartItem = {...thisItem, quantity: 1};
+            let subTotal = shoeService.setSubTotal(thisItem);
+            let cartItem = {...thisItem, quantity: 1, subTotal};
             // Is the Item picked in the cart??
-            let someF = products.some(items => items.code == value);
+            let inTheCart = products.some(items => items.code === value);
 
-            if (someF === false) {
+            if (inTheCart === false) {
                 products = [...products, cartItem];
                 updateCart(products);
                 location.reload()

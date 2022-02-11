@@ -6,7 +6,7 @@
 
 #product1 h3 {
     font-size: 30px;
-    padding: 5px;
+    padding: 0 5px 5px 5px;
     margin-bottom: 10px;
 }
 
@@ -35,6 +35,10 @@
 
 #product1 .search .block option {
     padding: 2.5px auto;
+}
+
+.search-results h4{
+    color: crimson;
 }
 
 #product1 #pro-container {

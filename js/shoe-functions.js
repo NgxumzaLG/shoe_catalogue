@@ -58,7 +58,10 @@ function ShoeService(data) {
     }
 
     function setCart(inTheBag) {
-        userCart = inTheBag;
+        if (inTheBag !== null) {
+            userCart = inTheBag.filter(item => item.quantity !== 0);
+
+        } 
     }
 
     function getCart() {
@@ -66,7 +69,7 @@ function ShoeService(data) {
 
     }
 
-    function subTotal(theProduct) {
+    function setSubTotal(theProduct) {
         return 1 * theProduct.price;
 
     }
@@ -83,7 +86,7 @@ function ShoeService(data) {
 
             cart.map(item => {
                 qty += item.quantity;
-                grandTotal += item.price;
+                grandTotal += item.subTotal;
             });
         }
         
@@ -93,13 +96,20 @@ function ShoeService(data) {
         };
     }
 
+    function removeItem(id) {
+        let currentCart = getCart();
+        let excludeItem = currentCart.filter(item => item.code !== id);
+        return excludeItem;
+    }
+
     return {
         getProducts,
         getCart,
         filterProduct,
         setCart,
-        subTotal,
-        getTotal
+        setSubTotal,
+        getTotal,
+        removeItem
 
     }
 }
