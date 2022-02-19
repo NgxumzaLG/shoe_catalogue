@@ -35,7 +35,7 @@
 
 #cart table td:nth-child(3) {
     width: 190px;
-    text-align: center;
+    text-align: flex-start;
 }
 
 #cart table thead {
