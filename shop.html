@@ -15,13 +15,14 @@
             <div class="pro">
                 <img src={{image}} alt="">
                 <div class="des">
-                    <span>color: <strong>{{color}}</strong></span>
+                    <span>color: <strong class="text-big">{{color}}</strong></span>
                     <div>
-                        <span>size: <strong>{{size}}</strong>  In Store: <strong>{{in_stock}}</strong></span>
+                        <span>size: <strong  class="size-space">{{size}}</strong>  in store: <strong>{{in_stock}}</strong></span>
                     </div>
                     
                     <div class="star">
-                        <h5>{{brand}}</h5>
+                        <span><strong></strong></span>
+                        <span><strong class="brand-text">{{brand}}</strong> {{model}}</span>
                     </div>
                     <h4>R{{price}}</h4>
                 </div>
@@ -66,9 +67,12 @@
                 <select id="brand" class="search-brand">
                     <option value="any">any</option>
                     <option value="Adidas">Adidas</option>
-                    <option value="Nike">Nike</option>
-                    <option value="Vans">Vans</option>
                     <option value="Asics">Asics</option>
+                    <option value="Converse">Converse</option>
+                    <option value="Nike">Nike</option>
+                    <option value="Reebok">Reebok</option>
+                    <option value="Vans">Vans</option>
+                    
                 </select>            
             </div>
 
@@ -83,8 +87,13 @@
                     <option value="any">any</option>
                     <option value="Black">Black</option>
                     <option value="Blue">Blue</option>
-                    <option value="White">White</option>
+                    <option value="Brown">Brown</option>
+                    <option value="Green">Green</option>
                     <option value="Orange">Orange</option>
+                    <option value="Red">Red</option>
+                    <option value="White">White</option>
+                    <option value="Yellow">Yellow</option>
+                    
                 </select>            
             </div>
         </div>

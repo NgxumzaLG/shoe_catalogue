@@ -77,16 +77,12 @@ function ShoeService(data) {
     function getTotal(cart) {
         let qty = 0;
         let grandTotal = 0;
-        if (cart !== null) {
-            // for (const item of cart) {
-            //     qty += item.quantity;
-            //     grandTotal += item.price;
         
-            // } OR 
-
+        if (cart !== null) {
             cart.map(item => {
                 qty += item.quantity;
                 grandTotal += item.subTotal;
+
             });
         }
         

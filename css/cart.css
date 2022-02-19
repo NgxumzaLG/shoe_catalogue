@@ -13,6 +13,8 @@
 
 #cart img {
     width: 55px;
+    border-radius: 7.5px;
+    border: 1px solid #cce7d0;
 }
 
 #cart table td:nth-child(1) {
@@ -55,7 +57,7 @@
 }
 
 #cart table tbody tr td {
-    padding: 10px;
+    padding: 2.5px 2.5px 5px 2.5px;
 }
 
 #cart table tbody button {
@@ -80,6 +82,16 @@
     font-weight: bolder;
 }
 
+.model-text {
+    font-size: 13.5px;
+}
+
+.brand-text {
+    font-size: 16px;
+    padding-right: 2px;
+    font-weight: 800;
+}
+
 .total {
     border: 1.5px solid #088178;
     border-left: none;
@@ -93,8 +105,12 @@
 }
 
 .buy {
-    margin: 10px auto;
+    margin: auto;
     text-align: center;
+}
+
+.cart-btns {
+    padding-top: 0;
 }
 
 .buy button {
@@ -102,7 +118,7 @@
     font-weight: 700;
     background: #088178;
     border-radius: 5px;
-    margin: 15px 5px 10px 10px;
+    margin: 5px 5px 10px 10px;
     padding: 12.5px 20px;
     color: #E3E6F3;
     cursor: pointer;

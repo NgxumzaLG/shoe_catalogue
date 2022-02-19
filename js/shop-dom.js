@@ -10,18 +10,28 @@ var shopTemplate = Handlebars.compile(shopTemplateSource);
 let cart = [];
 let ourStock = [];
 
-// localStorage 
+// Does the localStorage have any product yet?
 if (localStorage['products']) {
-    let fromLocalStorage = JSON.parse(localStorage.getItem('products'));   
-    ourStock = fromLocalStorage;
+    let fromLocalStorage = JSON.parse(localStorage.getItem('products'));
+    // If our product list has more product than localStorage the update localStorage
+    if (fromLocalStorage.length === productList.length) {
+        ourStock = fromLocalStorage;
 
+    } else {
+        ourStock = productList;
+        localStorage.clear();
+        updateProducts(ourStock);
+
+
+    }
 
 } else {
     ourStock = productList;
-    updateProducts(ourStock)
+    updateProducts(ourStock);
 
 }
 
+// Is there any cart that already exists in the localStorage?
 if (localStorage['cart']) {
     cart = JSON.parse(localStorage.getItem('cart'));
 
@@ -41,6 +51,7 @@ document.addEventListener('DOMContentLoaded', () => {
     displayAllTotals(total);
     proContainer.innerHTML = shopTemplate({shopProducts: ourStock});
 
+    // Deconstruct the nodelist into an normal array of buttons
     addButtons = [...document.querySelectorAll('.add-btn')];
     const brandSearch = document.getElementById('brand');
     const sizeSearch = document.getElementById('size');
@@ -143,10 +154,11 @@ function addToCart(addBtns, products) {
         let inCart = products.find(item => item.code === value);
 
         if (inCart) {
+            // Update the Item that already exists in the cart
             button.style['color'] = 'crimson';
             button.style['transform'] = 'scale(1)';
             button.style['backgroundColor'] = '#ffccd5';
-            button.style['borderColor'] = '#ffb3c1';
+            button.style['borderColor'] = '#ff758f';
             button.disabled = true;
         } 
 
@@ -159,6 +171,7 @@ function addToCart(addBtns, products) {
             let inTheCart = products.some(items => items.code === value);
 
             if (inTheCart === false) {
+                // Add the Item in the cart and update localStorage
                 products = [...products, cartItem];
                 updateCart(products);
                 location.reload()

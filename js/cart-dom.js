@@ -90,20 +90,13 @@ document.addEventListener('DOMContentLoaded', () => {
     
 
     buyButton.addEventListener('click', () => {
-        localStorage.removeItem("cart");
-        // currentCart = null;
-        // shoeService.setCart(null);
-        // total = shoeService.getTotal(null);
-        // displayAllTotals(total);
-        // displayCartItems.innerHTML = '';
-        // updatedCartDisplay(currentCart, total);
-        location.reload();  
-
+        clearCart();
+        
     });
 
     clearButton.addEventListener('click', () => {
-        localStorage.removeItem("cart");
-        location.reload();
+        clearCart();
+        
     });
 
 });
@@ -121,6 +114,17 @@ function displayAllTotals(ourCart) {
 
 }
 
+function clearCart() {
+    localStorage.removeItem("cart");
+    currentCart = null;
+    shoeService.setCart(null);
+    total = shoeService.getTotal(null);
+    displayAllTotals(total);
+    displayCartItems.innerHTML = '';
+    updatedCartDisplay(currentCart, total);
+
+}
+
 function updatedCartDisplay(cart, total) {
     let theCart = cart || [];
     try {
@@ -130,7 +134,7 @@ function updatedCartDisplay(cart, total) {
                                                <tr>
                                                    <td><i id=${item.code} class="far fa-times-circle"></i></td>
                                                    <td><img src=${item.image} alt=""></td>
-                                                   <td>${item.brand}</td>
+                                                   <td><span class="model-text"><strong class="brand-text">${item.brand}:</strong> ${item.model}</span></td>
                                                    <td>${item.size}</td>
                                                    <td><span class="rand-sign">R </span>${item.price}<span class="zeros">,00</span></td>
                                                    <td><i id=${item.code} class="fas fa-plus"></i><span class="space">${item.quantity}

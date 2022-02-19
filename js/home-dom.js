@@ -21,6 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // FUNCTIONS
 function displayAllTotals(ourCart) {
+    // Update the number of items in the cart
     cartItems.innerHTML = `${ourCart.qty}`;
     cartItemsRespon.innerHTML = `${ourCart.qty}`;
 
