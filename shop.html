@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css">
     <link rel="stylesheet" href="./css/utilities.css">
     <link rel="stylesheet" href="./css/shop.css">
+    <link rel="shortcut icon" href="./img/shopping-bag.png" type="image/x-icon">
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.min.js"></script>
     
     <script type="text/x-template" class="shopTemplate">
@@ -21,17 +23,22 @@
                     </div>
                     
                     <div class="star">
-                        <span><strong></strong></span>
+                        <!-- <span><strong></strong></span> -->
                         <span><strong class="brand-text">{{brand}}</strong> {{model}}</span>
                     </div>
                     <h4>R{{price}}</h4>
                 </div>
                 <button class="add-btn" value={{code}}><i class="fal fa-shopping-cart cart"></i></button>
             </div>
-        
-        {{/each}}
-        
-    </script>
+            
+            {{/each}}
+            
+        </script>
+
+        <script src="./js/script.js" defer></script>
+        <script src="./js/product-list.js" defer></script>
+        <script src="./js/shoe-functions.js" defer></script>
+        <script src="./js/shop-dom.js" defer></script>
 
 </head>
 <body>
@@ -120,11 +127,6 @@
 
     </section>
 
-    <script src="./js/product-list.js"></script>
-    <script src="./js/shoe-functions.js"></script>
-
-    <script src="./js/script.js"></script>
-    <script src="./js/shop-dom.js"></script>
     
 </body>
 </html>

@@ -22,68 +22,57 @@ const shoeService = ShoeService(shopStock);
 document.addEventListener('DOMContentLoaded', () => {
     shoeService.setCart(myCart);
     let currentCart = shoeService.getCart();
-    let total = shoeService.getTotal(currentCart);
+    total = shoeService.getTotal(currentCart);
 
     displayAllTotals(total);
     updatedCartDisplay(currentCart, total);
     addIcon = [...document.querySelectorAll('.fa-plus')];
     updateAddIcon(addIcon, currentCart);
 
-
     displayCartItems.addEventListener('click', event => {
         if (event.target.classList.contains('fa-times-circle')) {
-            let removeItem = event.target;
-            let itemId = removeItem.id;
-            let excludeItem = shoeService.removeItem(itemId);
+            const removeItem = event.target;
+            const itemId = removeItem.id;
+            const excludeItem = shoeService.removeItem(itemId);
 
             shoeService.setCart(excludeItem);
             currentCart = shoeService.getCart();
             total = shoeService.getTotal(currentCart);
-            displayAllTotals(total);
-            updateCart(currentCart);
-            displayCartItems.innerHTML = '';
-            updatedCartDisplay(currentCart, total);
-            addIcon = [...document.querySelectorAll('.fa-plus')];
-            updateAddIcon(addIcon, currentCart);
+
+            updateProductContent(currentCart, total);
             // displayCartItems.removeChild(removeItem.parentElement.parentElement)
 
         } else if (event.target.classList.contains('fa-plus')) {
-            let addQty = event.target;
-            let itemId = addQty.id;
-            let tempItem = currentCart.find(item => item.code === itemId);
+            const addQty = event.target;
+            const itemId = addQty.id;
+            const tempItem = currentCart.find(item => item.code === itemId);
+
             if (tempItem.quantity !== tempItem.in_stock) {
-                tempItem.quantity ++;
+                tempItem.quantity++;
                 tempItem.subTotal = tempItem.quantity * tempItem.price;
             }
             
             shoeService.setCart(currentCart);
             currentCart = shoeService.getCart();
             total = shoeService.getTotal(currentCart);
-            displayAllTotals(total);
-            updateCart(currentCart);
-            displayCartItems.innerHTML = '';
-            updatedCartDisplay(currentCart, total);
-            addIcon = [...document.querySelectorAll('.fa-plus')];
-            updateAddIcon(addIcon, currentCart);
+
+            updateProductContent(currentCart, total);
 
         } else if (event.target.classList.contains('fa-minus')) {
-            let subtractQty = event.target;
-            let itemId = subtractQty.id;
-            let tempItem = currentCart.find(item => item.code === itemId);
+            const subtractQty = event.target;
+            const itemId = subtractQty.id;
+            const tempItem = currentCart.find(item => item.code === itemId);
+
             if (tempItem.quantity !== 0) {
                 tempItem.quantity --;
                 tempItem.subTotal = tempItem.quantity * tempItem.price;
             }
-            
+
             shoeService.setCart(currentCart);
             currentCart = shoeService.getCart();
             total = shoeService.getTotal(currentCart);
-            displayAllTotals(total);
-            updateCart(currentCart);
-            displayCartItems.innerHTML = '';
-            updatedCartDisplay(currentCart, total);
-            addIcon = [...document.querySelectorAll('.fa-plus')];
-            updateAddIcon(addIcon, currentCart);
+
+            updateProductContent(currentCart, total);
         }
 
     });
@@ -102,19 +91,9 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
-// FUNCTIONS
-function updateCart(cart) {
-    localStorage.setItem('cart', JSON.stringify(cart));
+// FUNCTIONS *****************************
 
-}
-
-function displayAllTotals(ourCart) {
-    cartItems.innerHTML = `${ourCart.qty}`;
-    cartItemsResponive.innerHTML = `${ourCart.qty}`;
-
-}
-
-function clearCart() {
+const clearCart = () => {
     localStorage.removeItem("cart");
     currentCart = null;
     shoeService.setCart(null);
@@ -125,8 +104,31 @@ function clearCart() {
 
 }
 
-function updatedCartDisplay(cart, total) {
+const updateProductContent = (cart, total) => {
+    displayAllTotals(total);
+    updateCart(cart);
+    displayCartItems.innerHTML = '';
+    updatedCartDisplay(cart, total);
+    addIcon = [...document.querySelectorAll('.fa-plus')];
+    updateAddIcon(addIcon, cart);
+
+};
+
+const updateCart = (cart) => {
+    localStorage.setItem('cart', JSON.stringify(cart));
+
+};
+
+const displayAllTotals= (ourCart) => {
+    cartItems.innerHTML = `${ourCart.qty}`;
+    cartItemsResponive.innerHTML = `${ourCart.qty}`;
+
+};
+
+
+const updatedCartDisplay = (cart, total) => {
     let theCart = cart || [];
+    
     try {
         if (theCart.length !== 0) {
             theCart.forEach(item => {
@@ -154,39 +156,34 @@ function updatedCartDisplay(cart, total) {
                                                 <td></td>
                                                 <td></td>
                                             </tr>
+                                            <tr>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <th class="total">TOTAL</th>
+                                                <td class="total">${total.qty}</td>
+                                                <td class="total"><span class="rand-sign">R </span>${total.grandTotal}<span class="zeros">,00</span></td>
+                                            </tr>
                                                 `;
     
         }
-            
-        displayCartItems.innerHTML += `
-                                        <tr>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <th class="total">TOTAL</th>
-                                            <td class="total">${total.qty}</td>
-                                            <td class="total"><span class="rand-sign">R </span>${total.grandTotal}<span class="zeros">,00</span></td>
-                                        </tr>
-                                            `;
-                                            
         
     } catch (error) {
-        console.log(error)
+        console.log(error);
         
     }
+};
 
-}
-
-function updateAddIcon(addIcons, products) {
+const updateAddIcon = (addIcons, products) => {
     addIcons.forEach(icon => {
-        let id = icon.id;
-        let inCart = products.find(item => item.code === id);
+        const id = icon.id;
+        const inCart = products.find(item => item.code === id);
 
         if (inCart.quantity === inCart.in_stock) {
             icon.style['color'] = 'crimson';
     
         } 
     });
-}
+};
 

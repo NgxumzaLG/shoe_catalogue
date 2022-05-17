@@ -1,6 +1,6 @@
 function ShoeService(data) {
-    var products = data || [];
-    var userCart = [];
+    const products = data || [];
+    let userCart = [];
 
     function getProducts() {
         return products;
@@ -8,13 +8,13 @@ function ShoeService(data) {
     }
 
     function filterProduct(searchThis) {
-        let useBrand = searchThis.brand;
-        let useSize = Number(searchThis.size);
-        let useColor = searchThis.color;
+        const useBrand = searchThis.brand;
+        const useSize = Number(searchThis.size);
+        const useColor = searchThis.color;
         let results;
 
         if (useSize === 0) {
-            if (useBrand === 'any' && useColor === 'any') {
+            if (useBrand === 'any' && useColor === 'any') { 
                 // NOT Filtering
                 results = products;
 
@@ -93,8 +93,8 @@ function ShoeService(data) {
     }
 
     function removeItem(id) {
-        let currentCart = getCart();
-        let excludeItem = currentCart.filter(item => item.code !== id);
+        const currentCart = getCart();
+        const excludeItem = currentCart.filter(item => item.code !== id);
         return excludeItem;
     }
 

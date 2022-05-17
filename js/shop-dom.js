@@ -4,15 +4,15 @@ const cartItems = document.querySelector('.cart-items');
 const cartItemsRespon = document.querySelector('.cart-items-respon');
 
 // Compile Templates
-var shopTemplateSource = document.querySelector(".shopTemplate").innerHTML;
-var shopTemplate = Handlebars.compile(shopTemplateSource);
+const shopTemplateSource = document.querySelector(".shopTemplate").innerHTML;
+const shopTemplate = Handlebars.compile(shopTemplateSource);
 
 let cart = [];
 let ourStock = [];
 
 // Does the localStorage have any product yet?
 if (localStorage['products']) {
-    let fromLocalStorage = JSON.parse(localStorage.getItem('products'));
+    const fromLocalStorage = JSON.parse(localStorage.getItem('products'));
     // If our product list has more product than localStorage the update localStorage
     if (fromLocalStorage.length === productList.length) {
         ourStock = fromLocalStorage;
@@ -21,7 +21,6 @@ if (localStorage['products']) {
         ourStock = productList;
         localStorage.clear();
         updateProducts(ourStock);
-
 
     }
 
@@ -60,8 +59,8 @@ document.addEventListener('DOMContentLoaded', () => {
     addToCart(addButtons, cart);
     
     brandSearch.addEventListener('change', () => {
-        let searchValues = searchInput();
-        let save = shoeService.filterProduct(searchValues);
+        const searchValues = searchInput();
+        const save = shoeService.filterProduct(searchValues);
 
         if (save.length !== 0) {
             proContainer.innerHTML = shopTemplate({shopProducts: save});
@@ -69,17 +68,14 @@ document.addEventListener('DOMContentLoaded', () => {
             addToCart(addButtons, cart);
 
         } else {
-            proContainer.innerHTML = `
-                                        <div class="search-results">
-                                        <h4>Sorry! no item found</h4>
-                                        </div>
-                                    `;
+            proContainer.innerHTML = noItemFound();
+
         }
     });
 
     sizeSearch.addEventListener('keyup', () => {
-        let searchValues = searchInput();
-        let save = shoeService.filterProduct(searchValues);
+        const searchValues = searchInput();
+        const save = shoeService.filterProduct(searchValues);
 
         if (save.length !== 0) {
             proContainer.innerHTML = shopTemplate({shopProducts: save});
@@ -87,17 +83,14 @@ document.addEventListener('DOMContentLoaded', () => {
             addToCart(addButtons, cart);
 
         } else {
-            proContainer.innerHTML = `
-                                        <div class="search-results">
-                                        <h4>Sorry! no item found</h4>
-                                        </div>
-                                    `;
+            proContainer.innerHTML = noItemFound();
+
         }
     });
 
     colorSearch.addEventListener('change', () => {
-        let searchValues = searchInput();
-        let save = shoeService.filterProduct(searchValues);
+        const searchValues = searchInput();
+        const save = shoeService.filterProduct(searchValues);
 
         if (save.length !== 0) {
             proContainer.innerHTML = shopTemplate({shopProducts: save});
@@ -105,53 +98,59 @@ document.addEventListener('DOMContentLoaded', () => {
             addToCart(addButtons, cart);
 
         } else {
-            proContainer.innerHTML = `
-                                        <div class="search-results">
-                                        <h4>Sorry! no item found</h4>
-                                        </div>
-                                    `;
+            proContainer.innerHTML = noItemFound();
         }
     });
 
 });
 
 
-// FUNCTIONS
-function updateProducts(products) {
-    localStorage.setItem('products', JSON.stringify(products));
 
-}
+// FUNCTIONS *****************************
 
-function updateCart(cart) {
-    localStorage.setItem('cart', JSON.stringify(cart));
+const noItemFound = () => {
+    return `
+                <div class="search-results">
+                <h4>Sorry! no item found</h4>
+                </div>
+            `;
+};              
 
-}
-
-function getProduct(code) {
-    let products = ourStock;
-    let test = products.find(product => product.code == code);
-
-    return test;
-}
-
-function searchInput() {
+const searchInput = () => {
     return {
         brand: document.querySelector('.search-brand').value,
         size: document.querySelector('.search-size').value,
         color: document.querySelector('.search-color').value
     };
-}
+};
 
-function displayAllTotals(ourCart) {
+const getProduct = (code) => {
+    let products = ourStock;
+    const test = products.find(product => product.code == code);
+    
+    return test;
+};
+
+const updateProducts = (products) => {
+    localStorage.setItem('products', JSON.stringify(products));
+
+};
+
+const updateCart = (cart) => {
+    localStorage.setItem('cart', JSON.stringify(cart));
+
+};
+
+const displayAllTotals = (ourCart) => {
     cartItems.innerHTML = `${ourCart.qty}`;
     cartItemsRespon.innerHTML = `${ourCart.qty}`;
 
-}
+};
 
-function addToCart(addBtns, products) {
+const addToCart = (addBtns, products) => {
     addBtns.forEach(button => {
-        let value = button.value;
-        let inCart = products.find(item => item.code === value);
+        const value = button.value;
+        const inCart = products.find(item => item.code === value);
 
         if (inCart) {
             // Update the Item that already exists in the cart
@@ -164,19 +163,19 @@ function addToCart(addBtns, products) {
 
         button.addEventListener('click', () => {
             // Get the Item picked
-            let thisItem = getProduct(value);
-            let subTotal = shoeService.setSubTotal(thisItem);
-            let cartItem = {...thisItem, quantity: 1, subTotal};
+            const thisItem = getProduct(value);
+            const subTotal = shoeService.setSubTotal(thisItem);
+            const cartItem = { ...thisItem, quantity: 1, subTotal };
             // Is the Item picked in the cart??
-            let inTheCart = products.some(items => items.code === value);
+            const inTheCart = products.some(items => items.code === value);
 
             if (inTheCart === false) {
                 // Add the Item in the cart and update localStorage
                 products = [...products, cartItem];
                 updateCart(products);
-                location.reload()
+                location.reload();
 
             }            
         });
     });
-}
+};
